@@ -9,7 +9,7 @@
 import Foundation
 
 /// A struct representing exif informations of a photo from the Unsplash API.
-public struct UnsplashPhotoExif: Codable {
+public struct UnsplashPhotoExif: Codable, Equatable {
 
     public let aperture: String
     public let exposureTime: String

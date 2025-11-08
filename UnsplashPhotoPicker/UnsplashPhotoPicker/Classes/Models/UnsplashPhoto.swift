@@ -9,7 +9,7 @@
 import UIKit
 
 /// A struct representing a photo from the Unsplash API.
-public struct UnsplashPhoto: Codable {
+public struct UnsplashPhoto: Codable, Equatable {
 
     public enum URLKind: String, Codable {
         case raw
