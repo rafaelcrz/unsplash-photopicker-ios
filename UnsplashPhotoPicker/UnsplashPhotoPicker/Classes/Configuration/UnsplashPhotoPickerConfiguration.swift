@@ -46,6 +46,8 @@ public struct UnsplashPhotoPickerConfiguration {
 
     /// Set the content safety filter.
     public var contentFilterLevel = defaultContentFilterLevel
+    
+    public var utmSource: String = ""
 
     /// The default memory capacity used by the cache.
     public static let defaultMemoryCapacity: Int = ImageCache.memoryCapacity
@@ -78,7 +80,8 @@ public struct UnsplashPhotoPickerConfiguration {
                 allowsMultipleSelection: Bool = false,
                 memoryCapacity: Int = defaultMemoryCapacity,
                 diskCapacity: Int = defaultDiskCapacity,
-                contentFilterLevel: ContentFilterLevel = defaultContentFilterLevel
+                contentFilterLevel: ContentFilterLevel = defaultContentFilterLevel,
+                utmSource: String = ""
     ) {
         self.accessKey = accessKey
         self.secretKey = secretKey
@@ -87,6 +90,7 @@ public struct UnsplashPhotoPickerConfiguration {
         self.memoryCapacity = memoryCapacity
         self.diskCapacity = diskCapacity
         self.contentFilterLevel = contentFilterLevel
+        self.utmSource = utmSource
     }
 
     init() {}
