@@ -100,7 +100,9 @@ class PhotoView: UIView {
         
         let topActions = [
             UIAction(title: "Unsplash author profile", image: nil, handler: { _ in
-                UIApplication.shared.open(profileURL)
+                DispatchQueue.main.async {
+                    UIApplication.shared.open(profileURL)
+                }
             })
         ]
 
