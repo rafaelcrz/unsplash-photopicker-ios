@@ -60,6 +60,9 @@ class PhotoView: UIView {
         imageView.backgroundColor = photo.color
         currentPhotoID = photo.identifier
         downloadImage(with: photo)
+        if #available(iOS 14, *) {
+            setupMenu(photo: photo)
+        }
     }
 
     private func downloadImage(with photo: UnsplashPhoto) {
@@ -88,6 +91,35 @@ class PhotoView: UIView {
             URLQueryItem(name: "w", value: "\(frame.width)"),
             URLQueryItem(name: "dpr", value: "\(Int(screenScale))")
         ])
+    }
+    
+    @available(iOS 14.0, *)
+    private func setupMenu(photo: UnsplashPhoto) {
+        let utmSource: String = Configuration.shared.utmSource
+        guard let profileURL: URL = URL(string: "https://unsplash.com/@\(photo.user.username)?utm_source=\(utmSource)&utm_medium=referral") else { return }
+        
+        let topActions = [
+            UIAction(title: "Unsplash author profile", image: nil, handler: { _ in
+                UIApplication.shared.open(profileURL)
+            })
+        ]
+
+        let uiMenu = UIMenu(title: "", children: topActions)
+
+        let button = UIButton(type: .system)
+        button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "ellipsis.circle.fill"), for: .normal)
+        button.setTitle(nil, for: .normal)
+        button.showsMenuAsPrimaryAction = true
+        button.menu = uiMenu
+
+        addSubview(button)
+
+        NSLayoutConstraint.activate([
+              button.topAnchor.constraint(equalTo: topAnchor, constant: 4),
+              button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4)
+          ])
     }
 
     // MARK: - Utility
